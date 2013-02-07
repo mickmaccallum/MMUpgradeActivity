@@ -12,7 +12,50 @@
 //  That being said, you are free to use this code free of charge for absolutely anything you want. You may use this in personal projects, commercial projects or for anything else.
 //
 //  Accreditation is not required, but is always appreciated.
-#import "AppDelegate.h"
-@implementation AppDelegate
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{return YES;}
+
+
+#import "MMUpgradeActivity.h"
+
+@implementation MMUpgradeActivity
+{
+	NSURL *_appStoreURL;
+}
+
+- (NSString *)activityType
+{
+	return NSStringFromClass([self class]);
+}
+
+- (NSString *)activityTitle
+{
+    if (self.titleOfActivity.length > 0) {
+        return self.titleOfActivity;
+    }
+	return @"Upgrade";
+}
+
+- (UIImage *)activityImage
+{
+    if (self.iconOfActivity != nil) {
+        return self.iconOfActivity;
+    }
+	return [UIImage imageNamed:@"upgradeActivityIcon"];
+}
+
+- (BOOL)canPerformWithActivityItems:(NSArray *)activityItems
+{
+    _appStoreURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=%u&mt=8",self.appStoreAppID]];
+
+    if (self.appStoreAppID > 0 && [[UIApplication sharedApplication] canOpenURL:_appStoreURL]) {
+        return YES;
+    }
+
+	return NO;
+}
+
+- (void)performActivity
+{
+	[self activityDidFinish:[[UIApplication sharedApplication] openURL:_appStoreURL]];
+}
+
 @end
