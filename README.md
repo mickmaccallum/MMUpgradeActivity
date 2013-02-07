@@ -7,12 +7,13 @@ To use this subclass, simply add "MMUpgradeActivity.h" and "MMUpgradeActivity.m"
 
 From there, import "MMUpgradeActivity.h" into your view controller and create an instance of the activity with the following.
 
-```MMUpgradeActivity *upgrader = [MMUpgradeActivity new];
+```MMUpgradeActivity *upgrader = [MMUpgradeActivity new];```
+
 ```[upgrader setAppStoreAppID:538725002];```
+
 ```[upgrader setTitleOfActivity:@"Go Pro!"];```
 
-
-//    [upgrader setIconOfActivity:[UIImage imageNamed:@"myOtherImage"]];
+```//    [upgrader setIconOfActivity:[UIImage imageNamed:@"myOtherImage"]];```
 
 
 ^^Optional: If you want to use the images provided with the project, leave that line commented and include the images from this project in yours. If you wish to use your own image, use the line above to add it to the activity.
